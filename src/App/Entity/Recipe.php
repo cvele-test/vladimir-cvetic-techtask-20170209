@@ -72,7 +72,7 @@ class Recipe
     {
         $this->ingredients->remove($ingredient);
     }
-    
+
     /**
      * @return IngredientCollection
      */
