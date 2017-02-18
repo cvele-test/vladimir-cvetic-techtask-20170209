@@ -33,7 +33,9 @@ class RecipeTransformer extends TransformerAbstract
 
     /**
      * Include Ingredients.
+     *
      * @param Recipe $recipe
+     *
      * @return League\Fractal\Resource\Collection
      */
     public function includeIngredients(Recipe $recipe)

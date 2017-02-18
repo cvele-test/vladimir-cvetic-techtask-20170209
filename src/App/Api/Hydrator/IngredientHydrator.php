@@ -12,11 +12,11 @@ class IngredientHydrator implements Hydrator
     /**
      * Transforms array to recipe entity.
      *
-     * @param mixed $ingredient
+     * @param array $ingredient
      *
      * @return Ingredient
      */
-    public function hydrate($ingredient)
+    public function hydrate(array $ingredient): Ingredient
     {
         $entity = new Ingredient();
         $entity->setTitle($ingredient['title']);

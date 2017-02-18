@@ -16,7 +16,7 @@ class RecipeHydrator implements Hydrator
      *
      * @return Recipe
      */
-    public function hydrate($recipe)
+    public function hydrate(array $recipe): Recipe
     {
         $entity = new Recipe();
         $entity->setTitle($recipe['title']);

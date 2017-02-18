@@ -44,8 +44,10 @@ class IngredientCollection extends \ArrayObject
     }
 
     /**
-     * Checks if collection has Ingredient
-     * @param  Ingredient $ingredient
+     * Checks if collection has Ingredient.
+     *
+     * @param Ingredient $ingredient
+     *
      * @return bool
      */
     public function has(Ingredient $ingredient): bool

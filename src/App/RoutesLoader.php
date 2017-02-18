@@ -8,14 +8,14 @@ class RoutesLoader
 {
     private $app;
 
-    /** @inheritDoc **/
+    /** {@inheritdoc} **/
     public function __construct(Application $app)
     {
         $this->app = $app;
         $this->instantiateControllers();
     }
 
-    /** @inheritDoc **/
+    /** {@inheritdoc} **/
     private function instantiateControllers()
     {
         $this->app['lunch.controller'] = function () {
@@ -23,7 +23,7 @@ class RoutesLoader
         };
     }
 
-    /** @inheritDoc **/
+    /** {@inheritdoc} **/
     public function bindRoutesToControllers()
     {
         $api = $this->app['controllers_factory'];

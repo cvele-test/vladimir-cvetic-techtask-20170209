@@ -95,7 +95,8 @@ class Ingredient
     }
 
     /**
-     * Convers object to string
+     * Convers object to string.
+     *
      * @return string
      */
     public function __toString()

@@ -10,7 +10,7 @@ class ServicesLoader
     protected $app;
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function __construct(Application $app)
     {
@@ -18,7 +18,7 @@ class ServicesLoader
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function bindServicesIntoContainer()
     {

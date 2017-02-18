@@ -10,9 +10,11 @@ use League\Fractal;
 class Serializer
 {
     /**
-     * Serializes object
-     * @param  object $object
-     * @param  bool $json
+     * Serializes object.
+     *
+     * @param object $object
+     * @param bool   $json
+     *
      * @return string|array
      */
     public function serialize($object, $json = true)

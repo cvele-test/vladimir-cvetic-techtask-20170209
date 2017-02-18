@@ -21,7 +21,7 @@ class LunchController
 
     /**
      * @param LunchService $lunchService
-     * @param Serializer $serializer
+     * @param Serializer   $serializer
      */
     public function __construct(LunchService $lunchService, Serializer $serializer)
     {
@@ -36,7 +36,7 @@ class LunchController
      */
     public function lunch(Request $request): Response
     {
-        $ingredients = $request->query->get('ingredient');
+        $ingredients = $this->getDataFromRequest($request);
         $recipes = $this->lunchService->findLunchOptions($ingredients);
 
         $response = new Response();
@@ -46,10 +46,21 @@ class LunchController
         return $response;
     }
 
+    /**
+     * fetches ingredient data from request.
+     *
+     * @param Request $request
+     *
+     * @return array
+     */
     private function getDataFromRequest(Request $request): array
     {
-        return [
-            'ingredients' => $request->request->get('ingredient'),
-        ];
+        if ($request->getMethod() == 'GET') {
+            $requestBase = $request->query;
+        } else {
+            $requestBase = $request->request;
+        }
+
+        return $requestBase->get('ingredient');
     }
 }
