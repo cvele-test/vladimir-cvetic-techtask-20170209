@@ -46,6 +46,3 @@ echo "-- Install Composer --"
 curl -s https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 sudo chmod +x /usr/local/bin/composer
-
-echo "-- Chmoding ---"
-chmod -R 777 /vagrant/storage
