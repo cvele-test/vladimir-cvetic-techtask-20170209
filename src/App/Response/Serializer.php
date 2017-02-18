@@ -9,14 +9,20 @@ use League\Fractal;
 
 class Serializer
 {
+    /**
+     * Serializes object
+     * @param  object $object
+     * @param  bool $json
+     * @return string|array
+     */
     public function serialize($object, $json = true)
     {
         if ($object instanceof Recipe) {
-            $resource = new Fractal\Resource\Item($object, new RecipeTransformer);
+            $resource = new Fractal\Resource\Item($object, new RecipeTransformer());
         }
 
         if ($object instanceof RecipeCollection) {
-            $resource = new Fractal\Resource\Collection($object, new RecipeTransformer);
+            $resource = new Fractal\Resource\Collection($object, new RecipeTransformer());
         }
 
         $fractal = new Fractal\Manager();

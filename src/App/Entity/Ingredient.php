@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 /**
- * ingredient entity
+ * ingredient entity.
  */
 class Ingredient
 {
@@ -23,7 +23,7 @@ class Ingredient
     protected $bestBefore;
 
     /**
-     * Get the value of Title
+     * Get the value of Title.
      *
      * @return string
      */
@@ -33,7 +33,7 @@ class Ingredient
     }
 
     /**
-     * Set the value of Title
+     * Set the value of Title.
      *
      * @param string $title
      *
@@ -47,7 +47,7 @@ class Ingredient
     }
 
     /**
-     * Get the value of Use By
+     * Get the value of Use By.
      *
      * @return \DateTime
      */
@@ -57,7 +57,7 @@ class Ingredient
     }
 
     /**
-     * Set the value of Use By
+     * Set the value of Use By.
      *
      * @param \DateTime $useBy
      *
@@ -71,7 +71,7 @@ class Ingredient
     }
 
     /**
-     * Get the value of Best Before
+     * Get the value of Best Before.
      *
      * @return \DateTime
      */
@@ -81,7 +81,7 @@ class Ingredient
     }
 
     /**
-     * Set the value of Best Before
+     * Set the value of Best Before.
      *
      * @param \DateTime $bestBefore
      *
@@ -94,9 +94,12 @@ class Ingredient
         return $this;
     }
 
+    /**
+     * Convers object to string
+     * @return string
+     */
     public function __toString()
     {
         return $this->getTitle();
     }
-
 }

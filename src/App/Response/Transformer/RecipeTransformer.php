@@ -2,23 +2,26 @@
 
 namespace App\Response\Transformer;
 
+use League;
 use App\Entity\Recipe;
 use League\Fractal\TransformerAbstract;
 
 class RecipeTransformer extends TransformerAbstract
 {
     /**
-     * List of resources possible to include
+     * List of resources possible to include.
      *
      * @var array
      */
     protected $defaultIncludes = [
-        'ingredients'
+        'ingredients',
     ];
 
     /**
-     * Turn this item object into a generic array
+     * Turn this item object into a generic array.
+     *
      * @param Recipe $recipe
+     *
      * @return array
      */
     public function transform(Recipe $recipe)
@@ -29,12 +32,12 @@ class RecipeTransformer extends TransformerAbstract
     }
 
     /**
-     * Include Ingredients
-     *
-     * @return League\Fractal\ItemResource
+     * Include Ingredients.
+     * @param Recipe $recipe
+     * @return League\Fractal\Resource\Collection
      */
     public function includeIngredients(Recipe $recipe)
     {
-        return $this->collection($recipe->getIngredients(), new IngredientTransformer);
+        return $this->collection($recipe->getIngredients(), new IngredientTransformer());
     }
 }

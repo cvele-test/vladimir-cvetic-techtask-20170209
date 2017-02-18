@@ -8,17 +8,15 @@ use App\Entity\Ingredient;
 class IngredientCollection extends \ArrayObject
 {
     /**
-     * @param  Ingredient $ingredient
-     * @return void
+     * @param Ingredient $ingredient
      */
     public function add(Ingredient $ingredient)
     {
-        return $this->offsetSet(NULL, $ingredient);
+        return $this->offsetSet(null, $ingredient);
     }
 
     /**
-     * @param  Ingredient $ingredient
-     * @return void
+     * @param Ingredient $ingredient
      */
     public function remove(Ingredient $ingredient)
     {
@@ -26,22 +24,31 @@ class IngredientCollection extends \ArrayObject
     }
 
     /**
-     * Filters out ingredinets that are passed their use-by date
-     * @param  \DateTime $date
+     * Filters out ingredinets that are passed their use-by date.
+     *
+     * @param \DateTime $date
+     *
      * @return self
      */
     public function filterOutByUseDate(\DateTime $date): self
     {
-        $ingredients = array_filter((array) $this, function($ingredient) use ($date) {
+        $ingredients = array_filter((array) $this, function ($ingredient) use ($date) {
             $interval = $date->diff($ingredient->getUseBy());
+
             return !(bool) $interval->invert;
         });
 
         $this->exchangeArray($ingredients);
+
         return $this;
     }
 
-    public function has(Ingredient $ingredient)
+    /**
+     * Checks if collection has Ingredient
+     * @param  Ingredient $ingredient
+     * @return bool
+     */
+    public function has(Ingredient $ingredient): bool
     {
         return in_array($ingredient, (array) $this);
     }

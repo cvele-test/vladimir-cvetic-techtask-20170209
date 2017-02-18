@@ -7,7 +7,7 @@ use App\Collection\IngredientCollection;
 class IngredientsEndpoint implements Endpoint
 {
     /**
-     * Parsed data from json file
+     * Parsed data from json file.
      *
      * @var array|null
      */
@@ -18,10 +18,9 @@ class IngredientsEndpoint implements Endpoint
     public function fetch(array $endpoints)
     {
         $this->loadData($endpoints);
-        $collection = new IngredientCollection;
-        foreach(self::$data['ingredients'] as $ingredient)
-        {
-             $collection->add($this->fetchOne($ingredient['title'], $endpoints));
+        $collection = new IngredientCollection();
+        foreach (self::$data['ingredients'] as $ingredient) {
+            $collection->add($this->fetchOne($ingredient['title'], $endpoints));
         }
 
         return $collection;
@@ -30,11 +29,9 @@ class IngredientsEndpoint implements Endpoint
     public function fetchByIdentifiers(array $identifiers, array $endpoints)
     {
         $this->loadData($endpoints);
-        $collection = new IngredientCollection;
-        foreach(self::$data['ingredients'] as $ingredient)
-        {
-            if (!in_array($ingredient['title'], $identifiers))
-            {
+        $collection = new IngredientCollection();
+        foreach (self::$data['ingredients'] as $ingredient) {
+            if (!in_array($ingredient['title'], $identifiers)) {
                 continue;
             }
 
@@ -47,13 +44,14 @@ class IngredientsEndpoint implements Endpoint
     public function fetchOne($identitifer, array $endpoints)
     {
         $this->loadData($endpoints);
-        $ingredient = array_filter(self::$data['ingredients'], function($ingredient) use ($identitifer) {
+        $ingredient = array_filter(self::$data['ingredients'], function ($ingredient) use ($identitifer) {
             return strtolower($ingredient['title']) == strtolower($identitifer);
         });
         $ingredient = reset($ingredient);
         if ($ingredient['title'] === null) {
-            return $endpoints['ingredients']['hydrator']->hydrate(['title'=>$identitifer]);
+            return $endpoints['ingredients']['hydrator']->hydrate(['title' => $identitifer]);
         }
+
         return $endpoints['ingredients']['hydrator']->hydrate($ingredient);
     }
 
@@ -67,18 +65,19 @@ class IngredientsEndpoint implements Endpoint
     }
 
     /**
-     * @param  string $path
+     * @param string $path
+     *
      * @return array
      */
     private function unserializeDataFromPath($path): array
     {
         if (!file_exists($path)) {
-            throw new \Exception(sprintf("JSON file not found at path: `%s`", $path));
+            throw new \Exception(sprintf('JSON file not found at path: `%s`', $path));
         }
 
         return json_decode(file_get_contents($path), true);
     }
-    //
+
     // /**
     //  * Returns intedients structure based on array titles passed
     //  *
@@ -91,16 +90,16 @@ class IngredientsEndpoint implements Endpoint
     //     if ($data === null) {
     //         $data = $this->getAll();
     //     }
-    //
+
     //     if (!self::validateData($data)) {
     //         throw new \Exception("Error Processing Request", 1);
     //     }
-    //
+
     //     return array_filter($data['ingredients'], function($ingredient) use ($ingredients) {
     //         return in_array(strtolower($ingredient['title']), array_map('strtolower', $ingredients));
     //     });
     // }
-    //
+
     // /**
     //  * Filters ingredients by date use-by|best-before
     //  *
@@ -114,26 +113,26 @@ class IngredientsEndpoint implements Endpoint
     //     if ($data === null) {
     //         $data = $this->getAll();
     //     }
-    //
+
     //     if (!self::validateData($data)) {
     //         throw new \Exception("Error Processing Request");
     //     }
-    //
+
     //     if (count($data['ingredients']) == 0) {
     //         return [];
     //     }
-    //
+
     //     if (!array_key_exists($field, array_values($data['ingredients'])[0])) {
     //         throw new \Exception(sprintf("Field %s does not exist in data array", $field));
     //     }
-    //
+
     //     return array_filter($data['ingredients'], function($ingredient) use ($date, $field) {
     //         $useByDate = \DateTime::createFromFormat('Y-m-d', $ingredient['use-by']);
     //         $interval = $date->diff($useByDate);
     //         return !(bool) $interval->invert;
     //     });
     // }
-    //
+
     // /**
     //  * Filters out ingredients which use by date has passed
     //  * @param \DateTime $date Date to compare agains - current date
@@ -144,7 +143,7 @@ class IngredientsEndpoint implements Endpoint
     // {
     //     return $this->filterOutByDate($date, 'use-by', $data);
     // }
-    //
+
     // public static function validateData(array $data)
     // {
     //     return array_key_exists('ingredients', $data);

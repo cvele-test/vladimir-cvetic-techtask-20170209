@@ -1,15 +1,9 @@
 <?php
 
-use Silex\Application;
-use Silex\Provider\HttpCacheServiceProvider;
-use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use App\ServicesLoader;
-use App\RoutesLoader;
 use Carbon\Carbon;
 
 //accepting JSON
@@ -23,9 +17,9 @@ $app->before(function (Request $request) {
 $app->register(new ServiceControllerServiceProvider());
 
 $app->register(new MonologServiceProvider(), array(
-    "monolog.logfile" => ROOT_PATH . "/storage/logs/" . Carbon::now('Europe/London')->format("Y-m-d") . ".log",
-    "monolog.level" => $app["log.level"],
-    "monolog.name" => "application"
+    'monolog.logfile' => ROOT_PATH.'/storage/logs/'.Carbon::now('Europe/London')->format('Y-m-d').'.log',
+    'monolog.level' => $app['log.level'],
+    'monolog.name' => 'application',
 ));
 
 //load services
@@ -39,7 +33,8 @@ $routesLoader->bindRoutesToControllers();
 $app->error(function (\Exception $e, $code) use ($app) {
     $app['monolog']->addError($e->getMessage());
     $app['monolog']->addError($e->getTraceAsString());
-    return new JsonResponse(array("statusCode" => $code, "message" => $e->getMessage(), "stacktrace" => $e->getTraceAsString()));
+
+    return new JsonResponse(array('statusCode' => $code, 'message' => $e->getMessage(), 'stacktrace' => $e->getTraceAsString()));
 });
 
 return $app;

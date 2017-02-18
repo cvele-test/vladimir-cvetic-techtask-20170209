@@ -8,17 +8,15 @@ use App\Entity\Recipe;
 class RecipeCollection extends \ArrayObject
 {
     /**
-     * @param  Recipe $recipe
-     * @return void
+     * @param Recipe $recipe
      */
     public function add(Recipe $recipe)
     {
-        return $this->offsetSet(NULL, $recipe);
+        return $this->offsetSet(null, $recipe);
     }
 
     /**
-     * @param  Recipe $recipe
-     * @return void
+     * @param Recipe $recipe
      */
     public function remove(Recipe $recipe)
     {
@@ -27,38 +25,44 @@ class RecipeCollection extends \ArrayObject
 
     /**
      * Filters out recepies that do not have
-     * ingredients from passed IngredientCollection
-     * @param  IngredientCollection $ingredients
+     * ingredients from passed IngredientCollection.
+     *
+     * @param IngredientCollection $ingredients
+     *
      * @return self
      */
-    public function filterOutByIngredients(IngredientCollection $ingredients)
+    public function filterOutByIngredients(IngredientCollection $ingredients): self
     {
-        $recepies = array_filter((array) $this, function($recipe) use ($ingredients) {
+        $recepies = array_filter((array) $this, function ($recipe) use ($ingredients) {
             $recipeIngredientIterator = $recipe->getIngredients()->getIterator();
-            while($recipeIngredientIterator->valid()) {
+            while ($recipeIngredientIterator->valid()) {
                 if ($ingredients->has($recipeIngredientIterator->current()) === false) {
                     return false;
                 }
                 $recipeIngredientIterator->next();
             }
+
             return true;
         });
 
         $this->exchangeArray($recepies);
+
         return $this;
     }
 
     /**
      * Sorts recepies by placing ones who's
-     * ingredient has passed best-before to the bottom
-     * @param  \DateTime $date
+     * ingredient has passed best-before to the bottom.
+     *
+     * @param \DateTime $date
+     *
      * @return self
      */
     public function sortByIngredientBestBefore(\DateTime $date): self
     {
-        $this->uasort(function($key,$recipe) use ($date) {
+        $this->uasort(function ($key, $recipe) use ($date) {
             $recipeIngredientIterator = $recipe->getIngredients()->getIterator();
-            while($recipeIngredientIterator->valid()) {
+            while ($recipeIngredientIterator->valid()) {
                 $ingredient = $recipeIngredientIterator->current();
                 $interval = $date->diff($ingredient->getBestBefore());
 
@@ -68,6 +72,7 @@ class RecipeCollection extends \ArrayObject
 
                 $recipeIngredientIterator->next();
             }
+
             return 1;
         });
 

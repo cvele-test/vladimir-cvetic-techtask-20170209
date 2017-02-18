@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Collection\IngredientCollection;
 
 /**
- * recipe entity
+ * recipe entity.
  */
 class Recipe
 {
@@ -20,15 +20,15 @@ class Recipe
     protected $ingredients;
 
     /**
-     * constructor
+     * constructor.
      */
     public function __construct()
     {
-        $this->ingredients = new IngredientCollection;
+        $this->ingredients = new IngredientCollection();
     }
 
     /**
-     * Get the value of Title
+     * Get the value of Title.
      *
      * @return string
      */
@@ -38,7 +38,7 @@ class Recipe
     }
 
     /**
-     * Set the value of Title
+     * Set the value of Title.
      *
      * @param string $title
      *
@@ -53,16 +53,19 @@ class Recipe
 
     /**
      * @param Ingredient $ingredient
+     *
      * @return self
      */
     public function addIngredient(Ingredient $ingredient): self
     {
         $this->ingredients->append($ingredient);
+
         return $this;
     }
 
     /**
      * @param Ingredient $ingredient
+     *
      * @return self
      */
     public function removeIngredient(Ingredient $ingredient): self
@@ -71,12 +74,14 @@ class Recipe
     }
 
     /**
-     * @param  IngredientCollection $ingredientCollection
+     * @param IngredientCollection $ingredientCollection
+     *
      * @return self
      */
     public function setIngredients(IngredientCollection $ingredientCollection): self
     {
         $this->ingredients = $ingredientCollection;
+
         return $this;
     }
 

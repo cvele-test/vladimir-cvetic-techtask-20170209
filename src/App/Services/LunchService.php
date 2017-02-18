@@ -20,23 +20,23 @@ class LunchService
         $this->endpointFactory = $endpointFactory;
     }
 
-
     /**
-     * Find recepies by available ingredients
-     * @param  array $ingredients
+     * Find recepies by available ingredients.
+     *
+     * @param array          $ingredients
      * @param \DateTime|null $currentDateTime
+     *
      * @return array
      */
     public function findLunchOptions(array $ingredients, \DateTime $currentDateTime = null): RecipeCollection
     {
         if ($currentDateTime === null) {
-            $currentDateTime = new \DateTime;
+            $currentDateTime = new \DateTime();
         }
 
         $ingredients = $this->endpointFactory
                           ->fetchByIdentifiers('ingredients', $ingredients)
                           ->filterOutByUseDate($currentDateTime);
-
 
         $recipes = $this->endpointFactory
                           ->fetch('recipes')
@@ -45,5 +45,4 @@ class LunchService
 
         return $recipes;
     }
-
 }

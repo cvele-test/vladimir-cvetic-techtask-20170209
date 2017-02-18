@@ -2,12 +2,9 @@
 
 namespace App\Api\Endpoint;
 
-
 interface Endpoint
 {
+    public function fetch(array $endpoints);
 
-    function fetch(array $endpoints);
-
-    function fetchOne($identitifer, array $endpoints);
-
+    public function fetchOne($identitifer, array $endpoints);
 }
