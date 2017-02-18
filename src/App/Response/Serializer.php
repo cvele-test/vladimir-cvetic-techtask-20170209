@@ -13,7 +13,6 @@ class Serializer
      * Serializes object.
      *
      * @param object $object
-     * @param bool   $json
      *
      * @return string|array
      */

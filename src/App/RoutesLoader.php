@@ -30,6 +30,6 @@ class RoutesLoader
 
         $api->get('/lunch', 'lunch.controller:lunch');
 
-        $this->app->mount($this->app['api.endpoint'].'/'.$this->app['api.version'], $api);
+        $this->app->mount('/', $api);
     }
 }

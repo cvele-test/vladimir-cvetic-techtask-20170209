@@ -72,19 +72,7 @@ class Recipe
     {
         $this->ingredients->remove($ingredient);
     }
-
-    /**
-     * @param IngredientCollection $ingredientCollection
-     *
-     * @return self
-     */
-    public function setIngredients(IngredientCollection $ingredientCollection): self
-    {
-        $this->ingredients = $ingredientCollection;
-
-        return $this;
-    }
-
+    
     /**
      * @return IngredientCollection
      */
