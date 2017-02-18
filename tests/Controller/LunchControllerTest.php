@@ -9,7 +9,8 @@ class LunchControllerTest extends Silex\WebTestCase
     public function createApplication()
     {
         $app = new Silex\Application();
-        require __DIR__ . '/../../resources/config/test.php';
+        require __DIR__.'/../../resources/config/test.php';
+
         return require __DIR__.'/../../src/app.php';
     }
 

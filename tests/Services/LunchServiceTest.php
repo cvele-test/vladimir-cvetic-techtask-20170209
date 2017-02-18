@@ -8,7 +8,7 @@ use App\Services\LunchService;
 class LunchServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var LunchService $service
+     * @var LunchService
      */
     private $service;
 
@@ -17,13 +17,13 @@ class LunchServiceTest extends \PHPUnit_Framework_TestCase
         $endpointFactory = new EndpointFactory();
         $endpointFactory->addEndpoint('ingredients',
                                     dirname(__FILE__).'/../../src/App/Data/ingredients.json',
-                                    new \App\Api\Endpoint\IngredientsEndpoint,
-                                    new \App\Api\Hydrator\IngredientHydrator);
+                                    new \App\Api\Endpoint\IngredientsEndpoint(),
+                                    new \App\Api\Hydrator\IngredientHydrator());
 
         $endpointFactory->addEndpoint('recipes',
                                     dirname(__FILE__).'/../../src/App/Data/recipes.json',
-                                    new \App\Api\Endpoint\RecipesEndpoint,
-                                    new \App\Api\Hydrator\RecipeHydrator);
+                                    new \App\Api\Endpoint\RecipesEndpoint(),
+                                    new \App\Api\Hydrator\RecipeHydrator());
 
         $this->service = new LunchService($endpointFactory);
     }
@@ -37,14 +37,14 @@ class LunchServiceTest extends \PHPUnit_Framework_TestCase
     {
         $date = \DateTime::createFromFormat('Y-m-d', '2017-02-13');
         $recipes = $this->service->findLunchOptions([
-            'Ham', 'Cheese', 'Bread', 'Butter'
+            'Ham', 'Cheese', 'Bread', 'Butter',
         ], $date);
         $this->assertInstanceOf('App\Collection\RecipeCollection', $recipes);
         $this->assertCount(1, $recipes);
 
         $date = \DateTime::createFromFormat('Y-m-d', '2017-02-14');
         $recipes = $this->service->findLunchOptions([
-            'Ham', 'Cheese', 'Bread', 'Butter'
+            'Ham', 'Cheese', 'Bread', 'Butter',
         ], $date);
         $this->assertInstanceOf('App\Collection\RecipeCollection', $recipes);
         $this->assertCount(0, $recipes);

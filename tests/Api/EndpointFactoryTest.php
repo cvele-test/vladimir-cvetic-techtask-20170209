@@ -6,7 +6,6 @@ use App\Api\Endpoint\EndpointFactory;
 
 class EndpointFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var EndpointFactory
      */
@@ -17,13 +16,13 @@ class EndpointFactoryTest extends \PHPUnit_Framework_TestCase
         $this->service = new EndpointFactory();
         $this->service->addEndpoint('ingredients',
                                     dirname(__FILE__).'/../../src/App/Data/ingredients.json',
-                                    new \App\Api\Endpoint\IngredientsEndpoint,
-                                    new \App\Api\Hydrator\IngredientHydrator);
+                                    new \App\Api\Endpoint\IngredientsEndpoint(),
+                                    new \App\Api\Hydrator\IngredientHydrator());
 
         $this->service->addEndpoint('recipes',
                                     dirname(__FILE__).'/../../src/App/Data/recipes.json',
-                                    new \App\Api\Endpoint\RecipesEndpoint,
-                                    new \App\Api\Hydrator\RecipeHydrator);
+                                    new \App\Api\Endpoint\RecipesEndpoint(),
+                                    new \App\Api\Hydrator\RecipeHydrator());
     }
 
     public function tearDown()
@@ -89,6 +88,4 @@ class EndpointFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $response->getBestBefore());
         $this->assertEquals('Dummy', (string) $response);
     }
-
-
 }

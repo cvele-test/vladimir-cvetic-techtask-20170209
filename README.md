@@ -5,6 +5,11 @@
 vagrant up
 ```
 
+**Running tests**
+```
+$ vendor/bin/phpunit tests
+```
+
 **Direct your browser to:**
 ```
 http://192.168.123.100

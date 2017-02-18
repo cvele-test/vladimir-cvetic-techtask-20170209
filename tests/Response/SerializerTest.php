@@ -10,13 +10,13 @@ use App\Response\Serializer;
 class SerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Serializer $service
+     * @var Serializer
      */
     private $service;
 
     public function setUp()
     {
-        $this->service = new Serializer;
+        $this->service = new Serializer();
     }
 
     public function tearDown()
@@ -26,12 +26,12 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeItem()
     {
-        $recipe = new Recipe;
+        $recipe = new Recipe();
         $recipe->setTitle('dummy');
-        $ingredient = new Ingredient;
+        $ingredient = new Ingredient();
         $ingredient->setTitle('dummy-ingredient');
-        $ingredient->setUseBy(new \DateTime);
-        $ingredient->setBestBefore(new \DateTime);
+        $ingredient->setUseBy(new \DateTime());
+        $ingredient->setBestBefore(new \DateTime());
         $recipe->addIngredient($ingredient);
 
         $result = $this->service->serialize($recipe, false);
@@ -43,12 +43,12 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeCollection()
     {
-        $recipe = new Recipe;
+        $recipe = new Recipe();
         $recipe->setTitle('dummy');
-        $ingredient = new Ingredient;
+        $ingredient = new Ingredient();
         $ingredient->setTitle('dummy-ingredient');
-        $ingredient->setUseBy(new \DateTime);
-        $ingredient->setBestBefore(new \DateTime);
+        $ingredient->setUseBy(new \DateTime());
+        $ingredient->setBestBefore(new \DateTime());
         $recipe->addIngredient($ingredient);
 
         $recipeCollection = new RecipeCollection();
