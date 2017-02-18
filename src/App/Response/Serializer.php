@@ -18,6 +18,9 @@ class Serializer
      */
     public function serialize($object, $json = true)
     {
+        /**
+         * NOTICE: This should have it's own smarter factory.
+         */
         if ($object instanceof Recipe) {
             $resource = new Fractal\Resource\Item($object, new RecipeTransformer());
         }

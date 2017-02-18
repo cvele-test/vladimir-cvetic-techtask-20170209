@@ -1,2 +1,3 @@
 vendor/
 cs_fixer_tmp*
+.vagrant/
